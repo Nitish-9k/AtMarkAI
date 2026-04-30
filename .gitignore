@@ -1,0 +1,10 @@
+.env
+.vscode
+.pyc   # run time cache
+
+__pycache__  # run time cache
+
+venv/
+
+
+.streamlit/
