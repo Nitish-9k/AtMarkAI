@@ -5,6 +5,7 @@
 __pycache__  # run time cache
 
 venv/
+voice_env/
 
 
 .streamlit/

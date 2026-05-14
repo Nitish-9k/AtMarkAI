@@ -1,3 +1,4 @@
+streamlit
 #  
 numpy 
 pandas 
@@ -11,4 +12,8 @@ supabase
 bcrypt
 segno 
 pillow 
-streamlit
+
+
+librosa    # to edit or load the audio files 
+
+resemblyzer   # make embeddinngs of the audio files
