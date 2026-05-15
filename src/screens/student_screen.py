@@ -67,7 +67,7 @@ def student_dashboard():
 
     st.divider()
 
-    # Load subjects and attendance data
+   
     with st.spinner(' Loading your subjects...'):
         subjects = get_student_subjects(student_id)
         logs = get_student_attendance(student_id)
@@ -83,34 +83,38 @@ def student_dashboard():
             stats_map[sid]['attended'] += 1
 
     # Display subject cards
-    if subjects:
-        cols = st.columns(2)
-        for i, sub_node in enumerate(subjects):
-            sub = sub_node['subjects']
-            sid = sub['subject_id']
-            stats = stats_map.get(sid, {"total": 0, "attended": 0})
+
+    cols = st.columns(2)
+    for i, sub_node in enumerate(subjects):
+        sub = sub_node['subjects']
+        sid = sub['subject_id']
+        
+        
+        
+        
+        stats = stats_map.get(sid, {"total": 0, "attended": 0})
             
             # Calculate attendance percentage
-            attendance_pct = (stats['attended'] / stats['total'] * 100) if stats['total'] > 0 else 0
+        attendance_pct = (stats['attended'] / stats['total'] * 100) if stats['total'] > 0 else 0
             
-            def unenroll_button():
-                if st.button(" Unenroll from this course", type='tertiary',key="unenroll", use_container_width=True):
-                    unenroll_student_to_subject(student_id, sid)
-                    st.toast(f'Unenrolled from {sub["name"]} successfully!')
-                    st.rerun()
+        def unenroll_button():
+            if st.button(" Unenroll from this course", type='tertiary',key="unenroll", use_container_width=True):
+                 unenroll_student_to_subject(student_id, sid)
+                 st.toast(f'Unenrolled from {sub["name"]} successfully!')
+                 st.rerun()
 
-            with cols[i % 2]:
-                subject_card(
-                    name=sub['name'],
-                    code=sub['subject_code'],
-                    section=sub['section'],
-                    stats=[
-                        ('📅', 'Total Classes', stats['total']),
-                        ('✅', 'Attended', stats['attended']),
-                        ('📊', 'Attendance', f"{attendance_pct:.0f}%"),
-                    ],
-                    footer_callback=unenroll_button
-                )
+        with cols[i % 2]:
+            subject_card(
+                name=sub['name'],
+                code=sub['subject_code'],
+                section=sub['section'],
+                stats=[
+                    ('📅', 'Total Classes', stats['total']),
+                    ('✅', 'Attended', stats['attended']),
+                    ('📊', 'Attendance', f"{attendance_pct:.0f}%"),
+                ],
+                footer_callback=unenroll_button
+            )
     else:
         st.info(" You haven't enrolled in any subjects yet. Click 'Enroll in Subject' to get started!")
 
@@ -125,31 +129,31 @@ def student_screen():
         return
     
     # Login Screen
-    col1, col2, col3 = st.columns([1, 2, 1], vertical_alignment='center', gap='large')
-    with col2:
+    col1, col2 = st.columns(2, vertical_alignment='center', gap='xxlarge')
+    with col1:
         header_dashboard()
     
-    with col3:
+    with col2:
         if st.button("← Back to Home", type='secondary', key='loginbackbtn', shortcut="control+backspace", use_container_width=True):
             st.session_state['login_type'] = None
             st.rerun()
 
-    st.markdown("""
-        <div style="
-            text-align: center;
-            margin: 2rem 0 1rem 0;
-        ">
-            <h2 style="
-                color: #2d3748;
-                font-size: 1.75rem;
-                margin: 0;
-            ">🔐 Face Recognition Login</h2>
-            <p style="
-                color: #718096;
-                margin: 0.5rem 0 0 0;
-            ">Position your face in the center and capture your image</p>
-        </div>
-    """, unsafe_allow_html=True)
+    # st.markdown("""
+    #     <div style="
+    #         text-align: center;
+    #         margin: 2rem 0 1rem 0;
+    #     ">
+    #         <h2 style="
+    #             color: #2d3748;
+    #             font-size: 1.75rem;
+    #             margin: 0;
+    #         ">🔐 Face Recognition Login</h2>
+    #         <p style="
+    #             color: #718096;
+    #             margin: 0.5rem 0 0 0;
+    #         ">Position your face in the center and capture your image</p>
+    #     </div>
+    # """, unsafe_allow_html=True)
 
     st.divider()
     

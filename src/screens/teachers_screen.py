@@ -88,7 +88,7 @@ def teacher_dashboard():
 
 def teacher_tab_take_attendace():
     teacher_id = st.session_state.teacher_data['teacher_id']
-    st.header('Take AI Attendance')
+    st.header('Take Ai Attendance')
 
 
     if 'attendance_images' not in st.session_state:
@@ -133,7 +133,7 @@ def teacher_tab_take_attendace():
 
     with c2:
         
-        if st.button('Run Face Analysis', width='stretch', type='secondary', icon=':material/analytics:', disabled=not has_photos,key="face_analysis"):
+        if st.button('Run Face Analysis', width='stretch', type='tertiary', icon=':material/analytics:', disabled=not has_photos,key="face_analysis"):
             with st.spinner('Deep scanning classroom photos...'):
                 all_detected_ids = {}
 
@@ -161,7 +161,7 @@ def teacher_tab_take_attendace():
                     current_timestamp = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
 
 
-                    for node in enrolled_students:
+                    for node in enrolled_students(type='tertiary',vertical_alignment='center'):
                         student = node['students']
                         sources = all_detected_ids.get(int(student['student_id']), [])
                         is_present= len(sources) > 0
@@ -182,9 +182,9 @@ def teacher_tab_take_attendace():
 
                 attendance_result_dialog(pd.DataFrame(results), attendance_to_log)
 
-        with c3:
-            if st.button("Use Voice Attendance",type='primary',width="stretch",icon=":material/mic:"):
-                voice_attendance_dialog(selected_subject_id)        
+    with c3:
+        if st.button("Voice Attendance",type='tertiary',width="stretch",icon=":material/mic:"):
+            voice_attendance_dialog(selected_subject_id)        
 
 
 
