@@ -56,20 +56,20 @@ def teacher_dashboard():
         st.session_state.current_teacher_tab = "Take_attendance"
     
     with tab1:
-        tab_type = "primary" if st.session_state.current_teacher_tab == "Take_attendance" else "tertiary"
-        if st.button(" Take Attendance", type=tab_type,key="take_attendance", use_container_width=True):
+        type1 = "primary" if st.session_state.current_teacher_tab == "Take_attendance" else "tertiary"
+        if st.button(" Take Attendance", type=type1,key="take_attendance"):
             st.session_state.current_teacher_tab = "Take_attendance"
             st.rerun()
     
     with tab2:
-        tab_type = "primary" if st.session_state.current_teacher_tab == "Manage_subjects" else "tertiary"
-        if st.button(" Manage Subjects", type=tab_type,key="manage_subject", use_container_width=True):
+        type2 = "primary" if st.session_state.current_teacher_tab == "Manage_subjects" else "tertiary"
+        if st.button(" Manage Subjects", type=type2,key="manage_subject"):
             st.session_state.current_teacher_tab = "Manage_subjects"
             st.rerun()
     
     with tab3:
-        tab_type = "primary" if st.session_state.current_teacher_tab == "Attendance_Record" else "tertiary"
-        if st.button(" View Records", type=tab_type,key="view_record", use_container_width=True):
+        type3 = "primary" if st.session_state.current_teacher_tab == "Attendance_Record" else "tertiary"
+        if st.button(" View Records", type=type3,key="view_record",):
             st.session_state.current_teacher_tab = "Attendance_Record"
             st.rerun()
 
