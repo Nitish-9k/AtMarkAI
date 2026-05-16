@@ -13,7 +13,7 @@ from src.screens.pipeline.face_pipeline import predict_attendance
 import numpy as np
 from src.screens.database.config import supabase
 from src.screens.components.dialog_attendance_results import attendance_result_dialog
-from datetime import datetime
+from datetime import datetime ,timezone
 import pandas as pd
 from src.screens.components.dialog_voice_pipeline import voice_attendance_dialog 
 
@@ -252,7 +252,7 @@ def  teacher_tab_attendance_records():
 
         data.append({
             "ts_group":ts.split(".")[0] if ts else None,
-            "Time":datetime.fromisoformat(ts).strftime("%Y-%m-%d  %I:%M %p")if  ts else "N'A",
+            "Time": pd.to_datetime(ts, utc=True).tz_convert("Asia/Kolkata").strftime("%Y-%m-%d %I:%M %p") if ts else "N/A",
             "Subject":r["subjects"]["name"],
             "Subject Code":r["subjects"]["subject_code"],
             "is_present":bool(r.get("is_present",False))
