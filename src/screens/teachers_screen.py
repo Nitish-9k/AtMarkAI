@@ -161,7 +161,7 @@ def teacher_tab_take_attendace():
                     current_timestamp = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
 
 
-                    for node in enrolled_students(type='tertiary'):
+                    for node in enrolled_students:
                         student = node['students']
                         sources = all_detected_ids.get(int(student['student_id']), [])
                         is_present= len(sources) > 0
